@@ -60,8 +60,8 @@ spec:
             cpu: 500m
             memory: 250Mi
         env:
-        - name: MY_ENV
-          value: hello
+        - name: INTERVAL_MILLIS
+          value: "1000"
       restartPolicy: Always
       terminationGracePeriodSeconds: 60
       imagePullSecrets:
