@@ -2,13 +2,16 @@
 
 import RPi.GPIO as GPIO
 import time
+import datetime
 import requests
 
 URL = 'http://localhost:30000'
 
 def request_gpios():
-  body = requests.get(URL).json()
-  print('body: ' + str(body))
+  response = requests.get(URL, timeout=(1, 1))
+  body = response.json()
+  now = datetime.datetime.now()
+  print(str(now) + ' | body: ' + str(body))
   return body['gpios']
 
 def setup_gpios(gpios):
@@ -16,7 +19,7 @@ def setup_gpios(gpios):
     pin = gpio['pin']
     GPIO.setup(pin, GPIO.OUT)
 
-def set_gpios(gpios):
+def output_gpios(gpios):
   for gpio in gpios:
     pin = gpio['pin']
     value = gpio['value']
@@ -30,8 +33,8 @@ try:
 
   while True:
     gpios = request_gpios()
-    set_gpios(gpios)
-    time.sleep(1)
+    output_gpios(gpios)
+    time.sleep(0.5)
 
 except KeyboardInterrupt:
   GPIO.cleanup()
