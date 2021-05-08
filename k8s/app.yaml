@@ -5,12 +5,13 @@ metadata:
     app: app
   name: app
 spec:
+  type: NodePort
+  selector:
+    app: app
   ports:
   - port: 3000
     targetPort: 3000
-  selector:
-    app: app
-  type: NodePort
+    nodePort: 30000
 ---
 apiVersion: apps/v1
 kind: Deployment

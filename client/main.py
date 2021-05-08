@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO
 import time
 import requests
 
-URL = 'http://localhost:3000'
+URL = 'http://localhost:30000'
 
 def request_gpios():
   body = requests.get(URL).json()
