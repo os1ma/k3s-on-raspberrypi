@@ -2,7 +2,7 @@ const http = require('http');
 const process = require('process');
 
 const PORT = 3000
-const INTERVAL_MILLISEC = 1000;
+const INTERVAL_MILLIS = process.env.INTERVAL_MILLIS || 1000;
 
 const ON_RESPONSE = {
   "gpios": [
@@ -26,7 +26,7 @@ var response = ON_RESPONSE;
 
 intervalObj = setInterval(() => {
   response = response === ON_RESPONSE ? OFF_RESPONSE : ON_RESPONSE;
-}, INTERVAL_MILLISEC);
+}, INTERVAL_MILLIS);
 
 const server = http.createServer((req, res) => {
   res.writeHead(200, {'Content-Type': 'text/plain'});
